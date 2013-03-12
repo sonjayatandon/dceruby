@@ -42,8 +42,6 @@ class GameComponent
     
   end
   
-  
-  
   def pp
     out = [] 
     out << '{'

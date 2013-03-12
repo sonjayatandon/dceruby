@@ -53,4 +53,8 @@ class TestGameSession < Test::Unit::TestCase
     assert_equal("MyGame.attack(session, 5, 'flying', :grounded)", @session.get_action("attack(5, 'flying', :grounded)"))
     assert_nil(@session.get_action("attack)(5)"))
   end
+  
+  def test_component_stack
+    
+  end
 end

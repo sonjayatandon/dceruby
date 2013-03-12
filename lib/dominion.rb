@@ -48,10 +48,16 @@ module Dominion
   ########################################
   #  DEFINE THE GAME PLAY COMMANDS
   def self.draw_into_hand(session)
-    deck = session['current-player.deck']
+    deck = session['current-player.deck'] 
     discard = session['current-player.discard']
     hand = session['current-player.hand']
     
+  end
+  
+  def self.add_to_property(session, property_name, amount)
+    value = session[property_name] || 0
+    value += amount
+    session[property_name] = value
   end
   
   class GameDef
@@ -88,6 +94,22 @@ module Dominion
     end
 
     def self.setup_board(session)
+      num_players = session['definition.num-players']
+      num_victory_cards = 8
+      num_victory_cards = 12 unless num_players == 2
+      
+      ##### add the victory cards to the game board
+      session.add_to_component_stack('victory-cards.estates', @@game_pieces[:estate], num_victory_cards)
+      session.add_to_component_stack('victory-cards.duchies', @@game_pieces[:duchy], num_victory_cards)
+      session.add_to_component_stack('victory-cards.province', @@game_pieces[:province], num_victory_cards)
+      
+      ##### add the treasure cards to the game board
+      session.add_to_component_stack('treasure-cards.copper', @@game_pieces[:copper], 60)
+      session.add_to_component_stack('treasure-cards.silver', @@game_pieces[:copper], 60)
+      session.add_to_component_stack('treasure-cards.gold', @@game_pieces[:gold], 60)
+      
+      cstack = session['victory-cards.estates']
+      puts "num estates=#{cstack.length}"
     end
     
     def self.initialize_turn_structure(session)

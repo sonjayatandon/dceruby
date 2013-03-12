@@ -25,8 +25,9 @@ session = GameSession.new('Dominion')
 
 puts 'Setting up board \n'
 session['definition.starting_kingdom_cards'] = [:market,:council]
+session['definition.num-players'] = 2
 
-# Dominion::GameDef.setup_board(session)
+Dominion::GameDef.setup_board(session)
 Dominion::GameDef.initialize_turn_structure(session)
 
 puts 'Ready to play'

@@ -21,7 +21,24 @@
     :name: :copper
     :description: Copper
     :cost: 0
+    :keywords: treasure-card
     :action:
         :on-play:
-            - add_property('gold', 1)
-            - discard('gold')
+            - add_to_property('current-player.coins', 1)
+-
+    :name: :silver
+    :description: Silver
+    :cost: 3
+    :keywords: treasure-card
+    :action:
+        :on-play:
+            - add_to_property('current-player.coins', 2)
+-
+    :name: :gold
+    :description: Gold
+    :cost: 6
+    :keywords: treasure-card
+    :action:
+        :on-play:
+            - add_to_property('current-player.coins', 3)
+        
