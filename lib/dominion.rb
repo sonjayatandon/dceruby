@@ -1,5 +1,7 @@
-require 'gamecomponent'
-require 'gamesession'
+require 'game_component'
+require 'game_session'
+
+require 'yaml'
 
 module Dominion
   def self.boo(session)
@@ -53,17 +55,32 @@ module Dominion
   end
   
   class GameDef
+    @@filepath = nil
     def self.create_game_pieces()
       @@game_pieces={}
       
-      card = GameComponent.new('estate',nil,nil,nil)
-      card['victory-points']=1
-      card['cost']=2
-      card['keywords']='victory-card'
+      @@filepath = File.join(APP_ROOT, 'lib/dominion.yaml')
+      card_defs = YAML.load_file(@@filepath)
       
-      @@game_pieces[:estate]=card
+      card_defs.each do |config|
+        name = config[:name]
+        card = GameComponent.new(name.to_s,nil,nil,nil)
+        
+        config.each do |key, value|
+          card[key.to_s] = value unless key == :name || key == :action
+          if key == :action
+            value.each do |trigger,action_list|
+              action_list.each do |action|
+                  card.add_action(trigger, GameSession.convert_action('Dominion', action))
+              end
+            end
+          end
+        end
+        
+        @@game_pieces[name] = card
+      end
       
-      
+      @@game_pieces
     end
 
     def self.[](key)

@@ -1,0 +1,27 @@
+
+- 
+    :name: :estate
+    :description: Estate
+    :victory-points: 1
+    :cost: 2
+    :keywords: victory-card    
+-
+    :name: :duchy
+    :description: Duchy
+    :victory-points: 3
+    :cost: 5
+    :keywords: victory-card
+-    
+    :name: :province
+    :description: Province
+    :victory-points: 6
+    :cost: 8
+    :keywords: victory-card
+-
+    :name: :copper
+    :description: Copper
+    :cost: 0
+    :action:
+        :on-play:
+            - add_property('gold', 1)
+            - discard('gold')

@@ -7,12 +7,18 @@ APP_ROOT = File.dirname(__FILE__)
 
 $:.unshift(File.join(APP_ROOT, 'lib'))
 
-require 'gamesession'
+require 'game_session'
 require 'dominion'
 
 puts 'Initializing game definition'
 Dominion::GameDef.create_game_pieces()
-puts Dominion::GameDef[:estate].name
+
+card = Dominion::GameDef[:copper]
+puts "card=#{Dominion::GameDef[:copper].name}" 
+card.pp.each do |line|
+  puts line
+end
+
 
 puts 'Creating new game session \n'
 session = GameSession.new('Dominion')
