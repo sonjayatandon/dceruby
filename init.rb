@@ -32,4 +32,6 @@ Dominion::GameDef.initialize_turn_structure(session)
 
 puts 'Ready to play'
 
+puts 'some bogus message'
+
 session.do_next_action()
