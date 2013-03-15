@@ -109,8 +109,8 @@ module Dominion
       session.add_to_component_stack('treasure-cards.silver', @@game_pieces[:copper], 60)
       session.add_to_component_stack('treasure-cards.gold', @@game_pieces[:gold], 60)
       
-      cstack = session['victory-cards.estates']
-      puts "num estates=#{cstack.length}"
+      stack = session['victory-cards.estates']
+      puts "num estates=#{stack.length}"
     end
     
     def self.initialize_turn_structure(session)
