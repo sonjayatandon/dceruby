@@ -23,6 +23,7 @@ module Dominion
   
   def self.start_turn(session)
     puts "start turn"
+    5.times {self.draw_into_hand(session)}
   end
   
   def self.do_action(session)
