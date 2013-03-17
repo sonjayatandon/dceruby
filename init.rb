@@ -9,6 +9,7 @@ $:.unshift(File.join(APP_ROOT, 'lib'))
 
 require 'game_session'
 require 'dominion'
+require 'nomad'
 
 puts 'Initializing game definition'
 Dominion::GameDef.create_game_pieces()
@@ -29,6 +30,14 @@ session['definition.num-players'] = 2
 
 Dominion::GameDef.setup_board(session)
 Dominion::GameDef.initialize_turn_structure(session)
+
+puts 'Ready to play'
+
+session.do_next_action()
+
+puts "now testing nomad"
+session = GameSession.new('Nomad')
+Nomad::GameDef.initialize_turn_structure(session)
 
 puts 'Ready to play'
 
