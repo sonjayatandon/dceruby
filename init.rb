@@ -9,6 +9,7 @@ $:.unshift(File.join(APP_ROOT, 'lib'))
 
 require 'game_session'
 require 'dominion'
+require 'MMA'
 
 puts 'Initializing game definition'
 Dominion::GameDef.create_game_pieces()
@@ -29,6 +30,15 @@ session['definition.num-players'] = 2
 
 Dominion::GameDef.setup_board(session)
 Dominion::GameDef.initialize_turn_structure(session)
+
+puts 'Ready to play'
+
+session.do_next_action()
+
+
+puts "now testing mma"
+session = GameSession.new('MMA')
+MMA::GameDef.initialize_turn_structure(session)
 
 puts 'Ready to play'
 
